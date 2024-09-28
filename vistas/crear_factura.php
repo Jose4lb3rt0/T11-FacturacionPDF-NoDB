@@ -151,12 +151,12 @@ if (isset($_POST['eliminar'])){
                                                 <i class="fa-solid fa-file-pdf"></i>
                                             </a>
                                         </form>
-                                        <form action="" method="POST">
-                                            <input type="hidden" name="index" value="<?= array_search($factura, $facturas); ?>">
-                                            <a href="../assets/fpdf/Factura.php?index=<?= array_search($factura, $facturas);?>" target="_blank" name="" class="bg-green-500 flex items-center gap-1 text-white font-semibold p-2 rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-green-500 focus:outline-none transition-all duration-300">
+                                        <form action="mandar_factura.php" method="POST">
+                                            <input type="hidden" name="index" value="<?= array_search($factura, $facturas) ?>">
+                                            <button type="submit" class="bg-green-500 flex items-center gap-1 text-white font-semibold p-2 rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-green-500 focus:outline-none transition-all duration-300">
                                                 <span>Enviar</span>
-                                                <i class="fa-solid fa-file-pdf"></i>
-                                            </a>
+                                                <i class="fa-solid fa-envelope"></i>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
