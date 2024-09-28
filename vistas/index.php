@@ -1,30 +1,5 @@
 <?php
     require 'layout.php';
-    require_once '../clases/cliente.php';
-    require_once '../clases/producto.php';
-    require_once '../clases/factura.php';
-
-    if (!isset($_SESSION['clientes'])) {
-        $_SESSION['clientes'] = [];
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['eliminar'])) {
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $dni = $_POST['dni'];
-        $telefono = $_POST['telefono'];
-    
-        $cliente = new Cliente($nombre, $apellido, $dni, $telefono);
-        $_SESSION['clientes'][] = $cliente;
-    }
-
-    if (isset($_POST['eliminar'])) {
-        $index = $_POST['index'];
-        if (isset($_SESSION['clientes'][$index])) {
-            unset($_SESSION['clientes'][$index]);
-            $_SESSION['clientes'] = array_values($_SESSION['clientes']);
-        }
-    }
 ?>
 
 <body>

@@ -3,22 +3,18 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';  
 require '../clases/Factura.php';
+require '../assets/fpdf/generar_factura.php';
 
 $index = isset($_POST['index']) ? $_POST['index'] : 0;
 
-session_start();
 $factura = $_SESSION['facturas'][$index];
 $cliente = $factura->getCliente();
 $productos = $factura->getProductos();
 $total = $factura->calcularTotal();
 
-ob_start();
-$pdfFile = include('../assets/fpdf/Factura.php'); 
-ob_end_clean();
-
 $timestamp = date('Ymd_His');
 $pdfFile = "../mails/output_{$timestamp}.pdf";
-$pdf->Output('F', $pdfFile);
+generarFacturaPDF($factura, $pdfFile);
 
 $emailCliente = $cliente->getCorreo(); 
 
