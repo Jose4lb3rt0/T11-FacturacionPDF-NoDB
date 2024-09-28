@@ -5,12 +5,14 @@
         protected $apellido;
         protected $dni;
         protected $telefono;
+        protected $correo;
 
-        public function __construct($nombre, $apellido, $dni, $telefono){
+        public function __construct($nombre, $apellido, $dni, $telefono, $correo){
             $this->nombre = $nombre;
             $this->apellido = $apellido;
             $this->dni = $dni;
             $this->telefono = $telefono;
+            $this->correo = $correo;
         }
 
         public function getNombre(){
@@ -29,5 +31,9 @@
             return $this->telefono;
         }
 
+        public function getCorreo(){
+            return $this->correo;
+        }
+        
         abstract public function mostrarDatos();
     }

@@ -13,8 +13,9 @@
         $apellido = $_POST['apellido'];
         $dni = $_POST['dni'];
         $telefono = $_POST['telefono'];
+        $correo = $_POST['correo'];
     
-        $cliente = new Cliente($nombre, $apellido, $dni, $telefono);
+        $cliente = new Cliente($nombre, $apellido, $dni, $telefono, $correo);
         $_SESSION['clientes'][] = $cliente;
     }
 
@@ -30,7 +31,7 @@
 <body>
 
         <div class="flex p-4 justify-center gap-5">
-            <div class="bg-white p-8 rounded-lg shadow-lg max-w-xl">
+            <div class="bg-white p-8 rounded-lg shadow-lg w-full  max-w-3xl overflow-x-auto">
                 <form method="POST" action="">
                     <div class="flex items-center gap-1 text-2xl font-bold text-gray-700 mb-5 justify-center">
                         <i class="fa-solid fa-user"></i>
@@ -52,6 +53,10 @@
                         <label for="telefono" class="block text-gray-600 font-semibold mb-2">Teléfono:</label>
                         <input type="text" id="telefono" name="telefono" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Ingresa el telefono" required>
                     </div>
+                    <div class="mb-4">
+                        <label for="correo" class="block text-gray-600 font-semibold mb-2">Correo:</label>
+                        <input type="email" id="correo" name="correo" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Ingresa el correo" required>
+                    </div>
                     <div class="flex justify-center mt-5">
                         <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
                             Agregar cliente
@@ -59,12 +64,13 @@
                     </div>
                 </form>
                 
-                <table class="bg-white shadow-md rounded-lg max-w-xl w-full mb-4">
+                <table class="bg-white shadow-md rounded-lg w-full min-w-full mb-4">
                     <thead>
                         <tr class="bg-blue-500 text-white text-left">
                             <th class="rounded-tl-lg py-2 px-4 text-center">Nombre</th>
                             <th class="py-2 px-4 text-center">DNI</th>
                             <th class="py-2 px-4 text-center">Teléfono</th>
+                            <th class="py-2 px-4 text-center">Correo</th>
                             <th class="rounded-tr-lg py-2 px-4 text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -81,6 +87,9 @@
                                     <td class="py-2 px-4 text-center">
                                         <?php echo $cliente->getTelefono(); ?>
                                     </td>
+                                    <td class="py-2 px-4 text-center">
+                                        <?php echo $cliente->getCorreo(); ?>
+                                    </td>
                                     <td class="py-2 px-4 text-center flex items-center justify-center">
                                         <form method="POST" action="" >
                                             <input type="hidden" name="index" value="<?= $index; ?>">
@@ -93,7 +102,7 @@
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr class="border-b">
-                                <td class="py-2 px-4 text-center" colspan="4" class="text-center">No hay clientes agregados.</td>
+                                <td class="py-2 px-4 text-center" colspan="5" class="text-center">No hay clientes agregados.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>

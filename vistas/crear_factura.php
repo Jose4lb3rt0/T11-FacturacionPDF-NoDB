@@ -65,7 +65,7 @@ if (isset($_POST['eliminar'])){
                                     <option value="">Seleccionar Cliente</option>
                                     <?php foreach ($clientes as $index => $cliente): ?>
                                         <option value="<?= $index; ?>">
-                                            <?php echo $cliente->getNombre() . ' ' . $cliente->getApellido() . ' - ' . $cliente->getDni(); ?></option>
+                                            <?php echo $cliente->getNombre() . ' ' . $cliente->getApellido() . ' - ' . $cliente->getDni() . ' - ' . $cliente->getCorreo(); ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
@@ -107,10 +107,10 @@ if (isset($_POST['eliminar'])){
                 </div>
             </form>
 
-            <table class="bg-white shadow-md rounded-lg max-w-2xl mt-4">
+            <table class="bg-white shadow-md rounded-lg max-w-2xl mt-4 ">
                 <thead>
                     <tr class="bg-gray-400 text-gray-800 text-left">
-                        <th class="rounded-tl-lg py-2 px-4">Cliente</th>
+                        <th class="rounded-tl-lg py-2 px-4 text-center">Cliente</th>
                         <th class="py-2 px-4 text-center">Productos</th>
                         <th class="py-2 px-4 text-center">Total</th>
                         <th class="rounded-tr-lg py-2 px-4 text-center">Acciones</th>
@@ -120,12 +120,13 @@ if (isset($_POST['eliminar'])){
                     <?php if (!empty($facturas)): ?>
                         <?php foreach ($facturas as $factura): ?>
                             <tr class="border-b bg-gray-300 text-gray-600 font-bold h-32">
-                                <td class="py-2 px-4">
+                                <td class="py-2 px-4 text-center">
                                     <?php echo 
-                                        $factura->getCliente()->getNombre() . ' ' . 
-                                        $factura->getCliente()->getApellido() . ' ' .  
-                                        $factura->getCliente()->getDNI() . ' ' .  
-                                        $factura->getCliente()->getTelefono(); 
+                                        $factura->getCliente()->getNombre() . ' - ' . 
+                                        $factura->getCliente()->getApellido() . ' - ' .  
+                                        $factura->getCliente()->getDNI() . ' - ' .  
+                                        $factura->getCliente()->getTelefono() . ' - ' .  
+                                        $factura->getCliente()->getCorreo(); 
                                     ?>
                                 </td>
                                 <td class="py-2 px-4">
@@ -134,13 +135,30 @@ if (isset($_POST['eliminar'])){
                                     <?php endforeach; ?>
                                 </td>
                                 <td class="py-2 px-4">S/ <?= number_format($factura->calcularTotal(), 2); ?></td>
-                                <td class="py-2 px-4 text-center">
-                                    <form action="" method="POST">
-                                        <input type="hidden" name="index" value="<?= array_search($factura, $facturas); ?>">
-                                        <button type="submit" name="eliminar" class="bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
+                                <td class="p-4 text-center">
+                                    <div class="flex items-center justify-center flex-col ">
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="index" value="<?= array_search($factura, $facturas); ?>">
+                                            <button type="submit" name="eliminar" class="flex items-center gap-1 bg-gray-500 text-white font-semibold p-2 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300">
+                                                <span>Eliminar</span>
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="index" value="<?= array_search($factura, $facturas); ?>">
+                                            <a href="../assets/fpdf/Factura.php?index=<?= array_search($factura, $facturas);?>" target="_blank" name="" class="bg-red-500 flex items-center gap-1 text-white font-semibold p-2 rounded-lg hover:bg-red-800 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300">
+                                                <span>Factura</span>
+                                                <i class="fa-solid fa-file-pdf"></i>
+                                            </a>
+                                        </form>
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="index" value="<?= array_search($factura, $facturas); ?>">
+                                            <a href="../assets/fpdf/Factura.php?index=<?= array_search($factura, $facturas);?>" target="_blank" name="" class="bg-green-500 flex items-center gap-1 text-white font-semibold p-2 rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-green-500 focus:outline-none transition-all duration-300">
+                                                <span>Enviar</span>
+                                                <i class="fa-solid fa-file-pdf"></i>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
