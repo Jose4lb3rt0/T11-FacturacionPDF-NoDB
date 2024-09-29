@@ -5,6 +5,8 @@ require '../vendor/autoload.php';
 require '../clases/Factura.php';
 require '../assets/fpdf/generar_factura.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 $index = isset($_POST['index']) ? $_POST['index'] : 0;
 
 $factura = $_SESSION['facturas'][$index];
@@ -24,7 +26,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                     
     $mail->SMTPAuth   = true;                                   
     $mail->Username   = 'josealberto3200@gmail.com';              
-    $mail->Password   = 'oefh gjce yuuh vfft';                       
+    $mail->Password   = $_ENV['SMTP_KEY'];          
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
     $mail->Port       = 465;                                   
 

@@ -1,0 +1,2 @@
+1. Abrir /vistas para ver "index"
+2. Al crear la factura, hacer click en "Crear Factura" del Navbar para actualizar la página.
